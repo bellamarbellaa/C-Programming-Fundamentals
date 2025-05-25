@@ -1,21 +1,34 @@
 #include <stdio.h>
 
-// Recursive function to calculate factorial of a number
-int fact(int n) {
-    // Base case: factorial of 0 or 1 is 1
-    if (n <= 1) {
-        return 1;
+// Recursive function to calculate power
+int power(int base, int exponent) {
+    if (exponent == 0) {
+        return 1; // Base case: any number raised to power 0 is 1
     } else {
-        // Recursive case: n! = n * (n-1)!
-        // The function keeps calling itself with a smaller n
-        // until it reaches the base case, then multiplies during the unwinding
-        return n * fact(n - 1);
+        // Recursive case: multiply base with result of power(base, exponent - 1)
+        return base * power(base, exponent - 1);
     }
 }
 
 int main() {
-    // Call the recursive factorial function with input 4 and print the result
-    printf("4! = %d\n", fact(4));
-    
-    return 0;
+    int base, exponent;
+
+    // Ask the user to input the base
+    printf("Enter base: ");
+    scanf("%d", &base);
+
+    // Ask the user to input the exponent
+    printf("Enter exponent: ");
+    scanf("%d", &exponent);
+
+    // Check if the exponent is non-negative
+    if (exponent < 0) {
+        // Negative exponents are not handled in this version
+        printf("This version does not handle negative exponents.\n");
+    } else {
+        // Call the recursive function and display the result
+        printf("%d raised to the power of %d is: %d\n", base, exponent, power(base, exponent));
+    }
+
+    return 0; // End of program
 }
